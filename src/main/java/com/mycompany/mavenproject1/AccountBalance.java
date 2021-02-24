@@ -164,13 +164,13 @@ public class AccountBalance {
     
     public boolean checkAccountBalanceDeductable(AccountBalance accountBalance2){
 	// fill in Body 
+        boolean isDeductable = false;
         Set<String> users = accountBalance2.getUsers();
-        TreeMap current_accountBalance = getAccountBalanceBase();
         for(String name : users){
             int amount = accountBalance2.getBalance(name);
-            
+            isDeductable = checkBalance(name, amount);
         }
-        return false;
+        return isDeductable;
     }
     
     
@@ -193,12 +193,7 @@ public class AccountBalance {
 	// fill in Body 
         boolean isDeductable = false;
         AccountBalance acc_balance =  txel.toAccountBalance();
-        Set<String> acc_name = acc_balance.getUsers();
-        
-        for(String  name : acc_name){
-            int amount = acc_balance.getBalance(name);
-            isDeductable = checkBalance(name, amount);
-        }
+        isDeductable = checkAccountBalanceDeductable(acc_balance);
         return isDeductable;
     }
     
